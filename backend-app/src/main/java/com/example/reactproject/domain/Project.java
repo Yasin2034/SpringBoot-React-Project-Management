@@ -2,17 +2,21 @@ package com.example.reactproject.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -46,6 +50,11 @@ public class Project {
 	private Date created_At;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date updated_At;
+	
+	
+	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL,mappedBy = "project")
+	@JsonIgnore
+	private Backlog backlog;
 	
 	@PrePersist
 	protected void onCreate() {
