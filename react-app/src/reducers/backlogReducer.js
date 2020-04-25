@@ -9,7 +9,7 @@ const initialState = {
   project_task: {}
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_BACKLOG:
       return {
@@ -25,9 +25,8 @@ export default function(state = initialState, action) {
 
     case DELETE_PROJECT_TASK:
       return {
-        ...state
-
-        // TO_DO
+        ...state,
+        project_task: state.project_tasks.filter(project_task => project_task.projectSequence !== action.payload)
       };
 
     default:
