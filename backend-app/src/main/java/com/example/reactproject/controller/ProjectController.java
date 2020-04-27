@@ -1,5 +1,6 @@
 package com.example.reactproject.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,33 +35,33 @@ public class ProjectController {
 	MapValidationService mapValidationService;
 
 	@PostMapping("")
-	public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result) {
+	public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result,Principal principal) {
 
 		ResponseEntity<?> errorMap = mapValidationService.MapValidationService(result);
 		if (errorMap != null)
 			return errorMap;
-		Project project1 = projectService.saveOrUpdate(project);
+		Project project1 = projectService.saveOrUpdate(project,principal.getName());
 
 		return new ResponseEntity<Project>(project1, HttpStatus.CREATED);
 	}
 
 	@GetMapping("/{projectId}")
-	public ResponseEntity<Project> getProjectById(@PathVariable String projectId) {
+	public ResponseEntity<Project> getProjectById(@PathVariable String projectId,Principal principal) {
 
-		Project project = projectService.findByProjectIdentifier(projectId);
+		Project project = projectService.findByProjectIdentifier(projectId,principal.getName());
 
 		return new ResponseEntity<Project>(project, HttpStatus.OK);
 	}
 
 	@GetMapping("/all")
-	public Iterable<Project> getAllProjects() {
+	public Iterable<Project> getAllProjects(Principal principal) {
 
-		return projectService.findAllProjects();
+		return projectService.findAllProjects(principal.getName());
 	}
 	
 	@DeleteMapping("/{projectId}")
-	public ResponseEntity<?> deleteProject(@PathVariable String projectId){
-		projectService.deleteByProjectIdentifier(projectId);
+	public ResponseEntity<?> deleteProject(@PathVariable String projectId,Principal principal){
+		projectService.deleteByProjectIdentifier(projectId,principal.getName());
 		
 		return new ResponseEntity<String>("Project with Id: " +projectId+" was deleted.",HttpStatus.OK);
 	}
