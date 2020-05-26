@@ -10,7 +10,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
-import com.example.reactproject.exception.InvalidLoginResponse;
+import com.example.reactproject.exception.response.InvalidLoginResponse;
 import com.google.gson.Gson;
 
 @Component

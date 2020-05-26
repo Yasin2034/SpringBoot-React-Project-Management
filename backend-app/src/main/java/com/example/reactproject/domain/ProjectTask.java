@@ -13,7 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,8 +39,12 @@ public class ProjectTask {
 
 	private String acceptanceCriteria;
 
+	@NotBlank
 	private String status;
 
+
+	@Min(value = 1)
+	@Max(value = 3)
 	private Integer priority;
 
 	private Date dueDate;

@@ -11,7 +11,7 @@ import org.springframework.validation.FieldError;
 @Service
 public class MapValidationService {
 
-	public ResponseEntity<?> MapValidationService(BindingResult result) {
+	public ResponseEntity<?> mapValidationService(BindingResult result) {
 		if (result.hasErrors()) {
 			HashMap<String, String> errorMap = new HashMap<>();
 

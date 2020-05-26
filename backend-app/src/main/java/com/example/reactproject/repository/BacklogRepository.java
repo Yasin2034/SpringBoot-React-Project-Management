@@ -6,6 +6,6 @@ import com.example.reactproject.domain.Backlog;
 
 public interface BacklogRepository extends CrudRepository<Backlog, Long> {
 	
-	Backlog findByProjectIdentifier(String projectIdentifier);
+	Backlog findByProjectIdentifierIgnoreCase(String projectIdentifier);
 
 }

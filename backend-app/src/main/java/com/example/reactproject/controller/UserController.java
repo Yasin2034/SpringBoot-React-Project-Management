@@ -45,7 +45,7 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest,BindingResult result){
-		ResponseEntity<?> errorMap = MapValidationService.MapValidationService(result);
+		ResponseEntity<?> errorMap = MapValidationService.mapValidationService(result);
 		if(errorMap != null) return errorMap;
 		
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -61,7 +61,7 @@ public class UserController {
 	@PostMapping("/register")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody User user,BindingResult result){
 		userValidator.validate(user, result);
-		ResponseEntity<?> errorMap = MapValidationService.MapValidationService(result);
+		ResponseEntity<?> errorMap = MapValidationService.mapValidationService(result);
 		if(errorMap != null) return errorMap;
 		User newUser = userService.saveUser(user);
 		return new ResponseEntity<User>(newUser, HttpStatus.CREATED);

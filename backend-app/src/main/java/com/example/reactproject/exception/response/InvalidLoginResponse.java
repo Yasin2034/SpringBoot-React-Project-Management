@@ -1,4 +1,4 @@
-package com.example.reactproject.exception;
+package com.example.reactproject.exception.response;
 
 public class InvalidLoginResponse {
 
