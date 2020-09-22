@@ -30,7 +30,7 @@ public class ProjectTaskServiceImpl implements IProjectTaskService {
 		backlog.setPTSequence(backlogSequence);
 		projectTask.setProjectSequence(backlog.getProjectIdentifier() + "-" + backlogSequence);
 		projectTask.setProjectIdentifier(projectIdentifier);
-
+		
 		return projectTaskRepository.save(projectTask);
 	}
 
@@ -42,20 +42,14 @@ public class ProjectTaskServiceImpl implements IProjectTaskService {
 
 	@Override
 	public ProjectTask findPTByProjectSequence(String backlog_id, String pt_id, String username) {
-		projectService.findByProjectIdentifier(backlog_id, username);
-
-		ProjectTask projectTask = projectTaskRepository.findByProjectSequenceIgnoreCase(pt_id);
-		if (projectTask == null || !projectTask.getProjectIdentifier().equals(backlog_id)) {
-			throw new ProjectNotFoundException("Project Task " + pt_id + " not found");
-		}
-
+		checkProjectTask(backlog_id, pt_id, username);
 		return projectTaskRepository.findByProjectSequenceIgnoreCase(pt_id);
 	}
 
 	@Override
 	public ProjectTask updateByProjectSequence(ProjectTask updatedProjectTask, String backlog_id, String pt_id,
 			String username) {
-		findPTByProjectSequence(backlog_id, pt_id, username);
+		checkProjectTask(backlog_id, pt_id, username);
 		return projectTaskRepository.save(updatedProjectTask);
 	}
 
@@ -63,6 +57,14 @@ public class ProjectTaskServiceImpl implements IProjectTaskService {
 	public void deletePTByProjectSequence(String backlog_id, String pt_id, String username) {
 		ProjectTask projectTask = findPTByProjectSequence(backlog_id, pt_id, username);
 		projectTaskRepository.delete(projectTask);
+	}
+	
+	private void checkProjectTask(String backlog_id, String pt_id, String username) {
+		projectService.findByProjectIdentifier(backlog_id, username);
+		ProjectTask projectTask = projectTaskRepository.findByProjectSequenceIgnoreCase(pt_id);
+		if (projectTask == null || !projectTask.getProjectIdentifier().equals(backlog_id)) {
+			throw new ProjectNotFoundException("Project Task " + pt_id + " not found");
+		}
 	}
 
 }
