@@ -13,7 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.reactproject.serviceImpl.CustomUserDetailsServiceImpl;
+import com.example.reactproject.service.Impl.CustomUserDetailsServiceImpl;
 
 import static com.example.reactproject.security.SecurityConstants.SIGN_UP_URLS;
 import static com.example.reactproject.security.SecurityConstants.H2_URL;

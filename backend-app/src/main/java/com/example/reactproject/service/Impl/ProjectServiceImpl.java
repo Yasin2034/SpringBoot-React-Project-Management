@@ -1,4 +1,4 @@
-package com.example.reactproject.serviceImpl;
+package com.example.reactproject.service.Impl;
 
 import org.springframework.stereotype.Service;
 

@@ -17,7 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import static com.example.reactproject.security.SecurityConstants.*;
 
 import com.example.reactproject.domain.User;
-import com.example.reactproject.serviceImpl.CustomUserDetailsServiceImpl;
+import com.example.reactproject.service.Impl.CustomUserDetailsServiceImpl;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
