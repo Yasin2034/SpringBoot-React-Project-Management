@@ -17,14 +17,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import static com.example.reactproject.security.SecurityConstants.*;
 
 import com.example.reactproject.domain.User;
-import com.example.reactproject.service.CustomUserDetailsService;
+import com.example.reactproject.serviceImpl.CustomUserDetailsServiceImpl;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 	@Autowired
-	private CustomUserDetailsService customUserDetailsService;
+	private CustomUserDetailsServiceImpl customUserDetailsService;
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {

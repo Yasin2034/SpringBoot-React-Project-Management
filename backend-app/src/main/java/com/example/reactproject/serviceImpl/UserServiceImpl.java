@@ -1,22 +1,23 @@
-package com.example.reactproject.service;
+package com.example.reactproject.serviceImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.reactproject.domain.User;
 import com.example.reactproject.exception.UsernameAlreadyExistsException;
 import com.example.reactproject.repository.UserRepository;
+import com.example.reactproject.service.IUserService;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
-public class UserService {
+@RequiredArgsConstructor
+public class UserServiceImpl implements IUserService{
 
-	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+	private final UserRepository userRepository;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	@Override
 	public User saveUser(User newUser) {
 		
 		try {
@@ -28,6 +29,8 @@ public class UserService {
 			throw new UsernameAlreadyExistsException("Username: " + newUser.getUsername()+" already exists");
 		}
 	}
+	
+	
 	
 	
 }

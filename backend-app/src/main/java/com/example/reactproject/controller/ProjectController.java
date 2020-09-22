@@ -19,18 +19,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.reactproject.domain.Project;
-import com.example.reactproject.service.MapValidationService;
-import com.example.reactproject.service.ProjectService;
+import com.example.reactproject.service.IMapValidationService;
+import com.example.reactproject.service.IProjectService;
 
 @RestController
 @RequestMapping("/api/project")
 public class ProjectController {
 
 	@Autowired
-	ProjectService projectService;
+	private IProjectService projectService;
 
 	@Autowired
-	MapValidationService mapValidationService;
+	private IMapValidationService mapValidationService;
 
 	@PostMapping("")
 	public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result,Principal principal) {

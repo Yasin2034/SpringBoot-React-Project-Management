@@ -19,8 +19,8 @@ import com.example.reactproject.domain.User;
 import com.example.reactproject.payload.JWTLoginSuccessResponse;
 import com.example.reactproject.payload.LoginRequest;
 import com.example.reactproject.security.JwtTokenProvider;
-import com.example.reactproject.service.MapValidationService;
-import com.example.reactproject.service.UserService;
+import com.example.reactproject.service.IMapValidationService;
+import com.example.reactproject.service.IUserService;
 import com.example.reactproject.validator.UserValidator;
 import static com.example.reactproject.security.SecurityConstants.*;
 @RestController
@@ -28,10 +28,10 @@ import static com.example.reactproject.security.SecurityConstants.*;
 public class UserController {
 	
 	@Autowired
-	private MapValidationService MapValidationService;
+	private IMapValidationService MapValidationService;
 	
 	@Autowired
-	private UserService userService;
+	private IUserService userService;
 	
 	@Autowired
 	private UserValidator userValidator;

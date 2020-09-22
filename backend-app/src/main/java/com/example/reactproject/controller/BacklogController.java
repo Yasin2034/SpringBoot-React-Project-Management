@@ -19,19 +19,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.reactproject.domain.ProjectTask;
-import com.example.reactproject.repository.BacklogRepository;
-import com.example.reactproject.service.MapValidationService;
-import com.example.reactproject.service.ProjectTaskService;
+import com.example.reactproject.service.IMapValidationService;
+import com.example.reactproject.service.IProjectTaskService;
 
 @RestController
 @RequestMapping("/api/backlog")
 public class BacklogController {
 
 	@Autowired
-	ProjectTaskService projectTaskService;
+	private IProjectTaskService projectTaskService;
 
 	@Autowired
-	MapValidationService mapValidationService;
+	private IMapValidationService mapValidationService;
 
 	@PostMapping("/{backlog_id}")
 	public ResponseEntity<?> addPTtoBacklog(@Valid @RequestBody ProjectTask projectTask, BindingResult result,
@@ -78,7 +77,7 @@ public class BacklogController {
 	public ResponseEntity<?> deleteProjectTask(@PathVariable String backlog_id, @PathVariable String pt_id,
 			Principal principal) {
 		projectTaskService.deletePTByProjectSequence(backlog_id, pt_id, principal.getName());
-
+		
 		return new ResponseEntity<String>("Project Task " + pt_id + "was deleted successfully", HttpStatus.OK);
 	}
 
